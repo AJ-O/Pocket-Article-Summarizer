@@ -6,9 +6,17 @@ from main import saveData
 
 def getData():
 
-    urlLists = saveData()
+    data = saveData()
+    titles = data[0]
+    print(titles[0:15])
+    urlLists = data[1]
+    summarizedArticles = []
+    summarizedData = []
 
-    for url in urlLists:
+    urlTest = urlLists[0 : 15]
+    i = 0
+
+    for url in urlTest:
 
         soup = requests.get(url)
 
@@ -22,7 +30,15 @@ def getData():
 
             text += p.text
 
-        makeRequestAndWriteFile(text)
+        i += 1
+        summary = makeRequestAndWriteFile(text)
+        summarizedArticles.append(summary)
+        print("got data", i)
+
+    summarizedData.append(summarizedArticles)
+    summarizedData.append(titles)
+
+    return summarizedData
 
 def makeRequestAndWriteFile(text):
 
@@ -40,9 +56,10 @@ def makeRequestAndWriteFile(text):
     #
     #     file.write(output)
 
-    output = res.json()
-    output = output['output']
+    try:
+        output = res.json()
+        output = output['output']
+    except:
+        output = "None"
 
-    print(output)
-
-getData()
+    return output

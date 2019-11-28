@@ -12,11 +12,11 @@ def getData():
 
     data = '{"consumer_key":"' + CONSUMER_KEY + '","redirect_uri":"http://www.google.com"}'
 
-    response = requests.post('https://getpocket.com/v3/oauth/request', headers = headers, data = data, verify = False)
+    response1 = requests.post('https://getpocket.com/v3/oauth/request', headers = headers, data = data, verify = False)
 
-    jsonval = response.json()
+    jsonval1 = response1.json()
 
-    request_token = jsonval['code']
+    request_token = jsonval1['code']
 
     print(request_token)
 
@@ -27,19 +27,19 @@ def getData():
 
     data = '{"consumer_key":"' + CONSUMER_KEY + '","code":"' + request_token + '"}'
 
-    response = requests.post('https://getpocket.com/v3/oauth/authorize', headers = headers, data = data, verify = False)
+    response2 = requests.post('https://getpocket.com/v3/oauth/authorize', headers = headers, data = data, verify = False)
 
-    jsonval = response.json()
+    jsonval2 = response2.json()
 
-    access_token = jsonval['access_token']
+    access_token = jsonval2['access_token']
 
     print(access_token)
 
     data = '{"consumer_key":"' + CONSUMER_KEY + '", "access_token":"' + access_token + '"}'
 
-    response = requests.post('https://getpocket.com/v3/get', headers = headers, data = data, verify = False)
+    response3 = requests.post('https://getpocket.com/v3/get', headers = headers, data = data, verify = False)
 
-    data =  response.json()
+    data =  response3.json()
 
     return data
 #data = None
@@ -52,6 +52,7 @@ def saveData():
 
     data = getData()
 
+    data_matrix = []
     item_url = []
     item_title = []
     item_image_url = []
@@ -74,7 +75,7 @@ def saveData():
             pass
 
         try:
-            item_title.append(data['list'][item]['given_title'])
+            item_title.append(data['list'][item]['resolved_title'])
         except:
             item_title.append("doesen't exist")
             pass
@@ -85,13 +86,15 @@ def saveData():
             item_image_url.append("doesen't exist")
             pass
 
-    for i in range(len(item_url)):
+    # for i in range(len(item_url)):
+    #
+    #     # print("item_url: ", item_url[i])
+    #     # print("item_title: ", item_title[i])
+    #     # print("image_url: ", item_image_url[i])
+    #     print("count: ", count)
 
-        # print("item_url: ", item_url[i])
-        # print("item_title: ", item_title[i])
-        # print("image_url: ", item_image_url[i])
-        print("count: ", count)
-        print(len(not_articles))
-        print(not_articles)
+    data_matrix.append(item_title)
+    data_matrix.append(item_url)
+    data_matrix.append(item_image_url)
 
-    return item_url
+    return data_matrix
