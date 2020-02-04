@@ -13,12 +13,11 @@ def getData():
     urlLists = data[1]
     summarizedArticles = []
     summarizedData = []
-
-    urlTest = urlLists[0 : 15]
+    print("Need to get summaries of " + str(len(titles)) + " articles, so please wait, this ought to take some time, SNACK TIME!!")
     i = 0
-
-    for url in urlTest:
-
+    
+    for url in urlLists:
+    
         soup = requests.get(url)
 
         bs_obj = BeautifulSoup(soup.text, 'html.parser')

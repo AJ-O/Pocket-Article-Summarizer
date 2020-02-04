@@ -33,8 +33,8 @@ class App(QWidget):
 
         super().__init__()
         self.title = "Pocket Summarizer"
-        self.width = 400
-        self.height = 400
+        self.width = 500
+        self.height = 450
         self.top = 325
         self.left = 450
         self.wind = None
@@ -47,22 +47,21 @@ class App(QWidget):
         Data = getData()
         summarizedArticles = Data[0]
         title = Data[1]
-
         scrollArea = QScrollArea()
         formLayout = QFormLayout()
         grid = QGridLayout()
         groupBox = QGroupBox()
-
-        for i in range(15):
+        
+        for i in range(len(titles)):
 
             label = QLabel(title[i], self)
-            label.move(5, 20 + (i * 30))
+            label.move(9, 20 + (i * 30))
             label.setWordWrap(True)
 
             button = QPushButton("Read Summary", self)
             button.move(275, 20 + (i * 30))
             button.setToolTip("Read the summary")
-            button.clicked.connect(partial(self.new_window, summarizedArticles[i]))#Calling functions with parameters
+            button.clicked.connect(partial(self.new_window, summarizedArticles[i]))#Calling functions with parameters, new window will be opened for reading summary
 
             formLayout.addRow(label, button)
 
