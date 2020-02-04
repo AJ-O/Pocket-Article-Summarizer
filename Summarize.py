@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from config import API_KEY
 from main import saveData
 
+#getting cleaned data
 def getData():
 
     data = saveData()
@@ -40,6 +41,7 @@ def getData():
 
     return summarizedData
 
+#Requests sent to deepai's api for summarizing user's articles
 def makeRequestAndWriteFile(text):
 
     res = requests.post(

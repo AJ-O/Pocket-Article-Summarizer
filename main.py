@@ -3,6 +3,7 @@ import requests
 
 from config import CONSUMER_KEY
 
+#Receiving data using pocket's api
 def getData():
 
     headers = {
@@ -11,7 +12,6 @@ def getData():
     }
 
     data = '{"consumer_key":"' + CONSUMER_KEY + '","redirect_uri":"http://www.google.com"}'
-
     response1 = requests.post('https://getpocket.com/v3/oauth/request', headers = headers, data = data, verify = False)
 
     jsonval1 = response1.json()
@@ -48,6 +48,7 @@ def getData():
 #
 #     json.dump(response.json(), file, ensure_ascii=False, indent=4)
 
+#Cleaning data
 def saveData():
 
     data = getData()

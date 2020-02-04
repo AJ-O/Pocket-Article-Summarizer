@@ -1,6 +1,7 @@
 import sys
 
-from summarize import getData
+#importing summarized data
+from Summarize import getData
 from PyQt5.QtWidgets import QApplication, QPushButton, QWidget, QListWidgetItem, QFormLayout, QMainWindow
 from PyQt5.QtWidgets import QListWidget, QLabel, QGridLayout, QVBoxLayout, QScrollArea, QGroupBox, QPlainTextEdit
 from functools import partial
@@ -61,7 +62,7 @@ class App(QWidget):
             button = QPushButton("Read Summary", self)
             button.move(275, 20 + (i * 30))
             button.setToolTip("Read the summary")
-            button.clicked.connect(partial(self.new_window, summarizedArticles[i]))
+            button.clicked.connect(partial(self.new_window, summarizedArticles[i]))#Calling functions with parameters
 
             formLayout.addRow(label, button)
 
